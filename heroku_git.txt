@@ -15,6 +15,8 @@ git push -u origin master
 RELEASE
 git tag -a v0.0.1 -m "Alpha codigo base"
 git push --tags
+git tag -d tagName
+git push --delete origin tagName
 
 
 HEROKU VARIABLES DE ENTORNO
