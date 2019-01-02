@@ -3,7 +3,8 @@ require('./config/config')
 require('../hbs/helpers');
 // Librerias
 const express = require('express')
-const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
+const colors = require('colors');
 
 
 //Declaracion de express
@@ -12,13 +13,15 @@ const app = express();
 const hbs = require('hbs')
 
 
+
+// Rutas
+app.use(require('./routes/usuario'));
+
 // Middleware Contenido Estatico
 app.use(express.static(__dirname + '/public'));
 
 // Express HBS Engine
 let ruta = __dirname + '/../views/parciales';
-console.log(ruta)
-
 hbs.registerPartials(__dirname + '/../views/parciales')
 app.set('view engine', 'hbs');
 
@@ -36,35 +39,23 @@ app.get('/', (req, res) => {
         subtitulo: 'Api Rest'
     })
 });
-/**
- * Rest Server
- */
 
-//Body Parser
-app.use(bodyParser.json())
 
-// Usuario
-app.get('/usuario', (req, res) => {
-    res.json({ mensaje: 'Get Usuario' })
-})
-app.post('/usuario', (req, res) => {
-    let body = req.body;
-    res.json({ mensaje: 'Post Usuario', data: body })
-})
-app.put('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-    let body = req.body;
-    res.json({ mensaje: `Put Usuario:`, data: body })
-})
-app.delete('/usuario/:id', (req, res) => {
-    let id = req.params.id;
-    res.json({ mensaje: 'Delete Usuario' })
-})
+
+
+
+
+
 
 
 /**
- * Run Server 
+ * Run Server , Conectar Mongo
  */
-app.listen(process.env.PORT, () => {
-    console.log(`Services en puerto ${process.env.PORT}`)
-})
+
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true }, (err, res) => {
+    if (err) throw err;
+    console.log(colors.green(`Services en Mongo  : ${colors.magenta('Cafe en Linea')}`));
+    app.listen(process.env.PORT, () => {
+        console.log(colors.green(`Services en puerto : ${ colors.magenta(process.env.PORT)}`))
+    })
+});
