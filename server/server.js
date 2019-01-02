@@ -13,11 +13,16 @@ const hbs = require('hbs')
 
 
 // Middleware Contenido Estatico
-app.use(express.static(__dirname + '../public'));
+app.use(express.static(__dirname + '/public'));
 
 // Express HBS Engine
-hbs.registerPartials(__dirname + '../views/parciales')
+let ruta = __dirname + '/../views/parciales';
+console.log(ruta)
+
+hbs.registerPartials(__dirname + '/../views/parciales')
 app.set('view engine', 'hbs');
+
+
 
 /**
  * Pagonas estaticas con HBS
@@ -27,17 +32,10 @@ app.get('/', (req, res) => {
         col01: 'Ventas',
         col02: 'Arriendos',
         col03: 'Otros',
-        titulo: 'eodeJS - express - HBS - Mongo',
+        titulo: 'node - express - HBS - Mongo',
         subtitulo: 'Api Rest'
     })
-})
-app.get('/contacto', (req, res) => {
-    res.render('contacto', {
-        titulo: 'eodeJS - express - eBS - Mongo',
-        subtitulo: 'Api Rest'
-    })
-})
-
+});
 /**
  * Rest Server
  */
