@@ -1,0 +1,10 @@
+HEROKU 
+1.- heroku login    --- Inicio de session
+2.- git remote -v   ---Ruta de almacenamiento
+
+GITHUB
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/mapperez/server-nodejs-hbs.git
+git push -u origin master
