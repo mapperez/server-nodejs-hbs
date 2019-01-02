@@ -15,3 +15,11 @@ git push -u origin master
 RELEASE
 git tag -a v0.0.1 -m "Alpha codigo base"
 git push --tags
+
+
+HEROKU VARIABLES DE ENTORNO
+
+1.- heroku config               --> muestra las variables de ENTORNO
+2.- heroku config:set x=""      --> crea variable en heroku
+3.- heroku config:get x         --> obtener variable de entorno
+4.- heroku config:unset x       --> borrar variable de entorno
