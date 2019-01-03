@@ -14,11 +14,11 @@ app.use(bodyParser.json())
 
 
 // Midleware
-const { verificatoken } = require('../midlewares/auth')
+const { verificatoken, verifica_admin } = require('../midlewares/auth')
 
 
 // Usuario
-app.get('/usuario/:id', (req, res) => {
+app.get('/usuario/:id', [verificatoken], (req, res) => {
     let id = req.params.id;
 
 
@@ -36,7 +36,7 @@ app.get('/usuario/:id', (req, res) => {
     })
 
 })
-app.get('/usuarios', verificatoken, (req, res) => {
+app.get('/usuarios', [verificatoken], (req, res) => {
 
     // Todos los usuario con paginacion
     let desde = Number(req.query.desde) || 0;
@@ -74,7 +74,7 @@ app.get('/usuarios', verificatoken, (req, res) => {
 
 
 })
-app.post('/usuario', verificatoken, (req, res) => {
+app.post('/usuario', [verificatoken, verifica_admin], (req, res) => {
 
     // Parametros que vienen por  post
     let body = req.body;
@@ -102,7 +102,7 @@ app.post('/usuario', verificatoken, (req, res) => {
     })
 
 })
-app.put('/usuario/:id', verificatoken, (req, res) => {
+app.put('/usuario/:id', [verificatoken, verifica_admin], (req, res) => {
     let id = req.params.id;
     //Quitar campos no actualizables
     // UnderScore pick
@@ -127,7 +127,7 @@ app.put('/usuario/:id', verificatoken, (req, res) => {
 
 
 })
-app.delete('/usuario/:id', verificatoken, (req, res) => {
+app.delete('/usuario/:id', [verificatoken, verifica_admin], (req, res) => {
     let id = req.params.id;
 
     Usuario.findOneAndUpdate(id, { estado: false }, (err, usuarioDB) => {

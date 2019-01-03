@@ -23,7 +23,23 @@ let verificatoken = (req, res, next) => {
 
     })
 }
+let verifica_admin = (req, res, next) => {
+
+    let usuario = req.usuario.user;
+    if (usuario.rol === "ADMIN_ROLE") {
+        next();
+    } else {
+        res.status(401).json({
+            success: false,
+            error: {
+                message: 'Se requiere rol de administrador'
+            }
+        })
+    }
+
+}
 
 module.exports = {
-    verificatoken
+    verificatoken,
+    verifica_admin
 }
