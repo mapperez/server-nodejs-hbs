@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 app.post('/login', (req, res) => {
     // Parametros que vienen por  post
     let body = req.body;
+
     Usuario.findOne({ email: body.email }, (err, userDB) => {
 
         if (err) {
@@ -30,6 +31,7 @@ app.post('/login', (req, res) => {
                 }
             })
         }
+
         if (!bcrypt.compareSync(body.password, userDB.password)) {
             return res.status(400).json({
                 success: false,
@@ -38,15 +40,22 @@ app.post('/login', (req, res) => {
                 }
             })
         }
+
+
         //Generar token
         let token = jwt.sign({ user: userDB }, process.env.SING_TOKEN, { expiresIn: process.env.EXPIRE_TOKEN });
-        return res.json({
+
+        let resp = {
             success: true,
             data: {
                 userDB,
                 token
             }
-        })
+        }
+
+        return res.json(resp)
+
+
     })
 })
 
