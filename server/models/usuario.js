@@ -53,7 +53,6 @@ usuarioSchema.methods.toJSON = function() {
     let userObject = user.toObject();
     delete userObject.password;
     delete userObject.__v;
-    delete userObject.estado;
     return userObject;
 }
 
