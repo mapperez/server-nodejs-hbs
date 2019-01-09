@@ -17,7 +17,7 @@ const { verificatoken, verifica_admin } = require('../midlewares/auth')
 
 
 // Usuario
-app.get('/categoria/:id', [verificatoken], (req, res) => {
+app.get('/categoria/:id', (req, res) => {
     let id = req.params.id;
     // Usuario que esta realizando la operacion
     let user = req.usuario.user
@@ -36,7 +36,7 @@ app.get('/categoria/:id', [verificatoken], (req, res) => {
     })
 
 })
-app.get('/categorias', [verificatoken], (req, res) => {
+app.get('/categorias',(req, res) => {
 
     // Todos los usuario con paginacion
     let desde = Number(req.query.desde) || 0;
@@ -87,7 +87,7 @@ app.get('/categorias', [verificatoken], (req, res) => {
 
 
 })
-app.post('/categoria', [verificatoken, verifica_admin], (req, res) => {
+app.post('/categoria',  (req, res) => {
 
     // Parametros que vienen por  post
     let body = req.body;
@@ -120,7 +120,7 @@ app.post('/categoria', [verificatoken, verifica_admin], (req, res) => {
     })
 
 })
-app.put('/categoria/:id', [verificatoken, verifica_admin], (req, res) => {
+app.put('/categoria/:id',  (req, res) => {
 
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre']);
@@ -146,7 +146,7 @@ app.put('/categoria/:id', [verificatoken, verifica_admin], (req, res) => {
     })
 
 })
-app.delete('/categoria/:id', [verificatoken, verifica_admin], (req, res) => {
+app.delete('/categoria/:id',(req, res) => {
     let id = req.params.id;
     // Usuario que esta realizando la operacion
     let user = req.usuario.user

@@ -12,7 +12,7 @@ let urlDB;
 let firma;
 let expira;
 if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb://localhost:27017/cafe'
+    urlDB = 'mongodb://mapperez:3yaxa9ef@ds147684.mlab.com:47684/cafe'
     firma = 'local'
     expira = '48h';
 } else {
